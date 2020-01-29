@@ -5,4 +5,4 @@ node_modules
 tmp/uploads/*
 !tmp/uploads/.gitkeep
 
-yarn.lock
+yarn.lock.old
