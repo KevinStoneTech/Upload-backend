@@ -21,7 +21,7 @@ const storageTypes = {
     }),
     s3: multerS3({
       s3: new aws.S3(),
-      bucket: 'uploadkstech',
+      bucket: process.env.BUCKET_S3,
       contentType: multerS3.AUTO_CONTENT_TYPE,
       acl: 'public-read',
       key: (req, file, cb) => {
@@ -40,7 +40,7 @@ module.exports = {
     dest: path.resolve(__dirname, '..', '..', 'tmp', 'uploads'),
     storage: storageTypes[process.env.STORAGE_TYPE],
     limits: {
-      fileSize: 2 * 1024 * 1024,
+      fileSize: 4 * 1024 * 1024,
     },
     fileFilter: (req, file, cb) => {
       const allowedMimes = [
@@ -48,6 +48,8 @@ module.exports = {
         'image/pjpeg',
         'image/png',
         'image/gif',
+        'image/x-icon',
+        'application/pdf',
       ];
 
       if (allowedMimes.includes(file.mimetype)) {
